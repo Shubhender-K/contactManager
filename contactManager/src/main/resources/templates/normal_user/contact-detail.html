@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	th:replace="normal_user/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section>
+		<div class="card mx-3 bg-contact-details" th:if="${contact}">
+
+			<div class="card-body ">
+
+				<div class="container text-center">
+	
+				
+					<img src="" th:src="${'/img/' + contact.cImageUrl}" alt=""
+						style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;" />
+
+					<h1 class="mt-3">
+						<span th:text="${contact.cName}"></span>(<span
+							th:text="${contact.cSecondName}"></span>)
+					</h1>
+
+					<div class="table-responsive">
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col"><span th:text="${'SCM2022' + contact.cId}"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Email</th>
+								<td class="font-weight-bold"><span
+									th:text="${contact.cEmail}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">Phone Number</th>
+								<td class="font-weight-bold"><span
+									th:text="${contact.cPhoneNum}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">Work</th>
+								<td class="font-weight-bold"><span
+									th:text="${contact.cWork}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+						</div>
+					<h2 class="text-center">Contact Description:</h2>
+					<div class="container mt-3 text-justify">
+
+						<span th:utext="${contact.cDescription}"></span>
+
+					</div>
+
+					<div class="container mt-3">
+
+						<a href="" th:href="@{'/user/update-contact/' + ${contact.cId}}"><button
+								class="btn btn-primary btn-block">
+								<span>Update</span><i class="fa-solid fa-pencil ml-2"></i>
+							</button></a>
+						<button th:onclick="|deleteContact(${contact.cId})|"
+							class="btn btn-danger btn-block mt-2">
+							<span>Delete</span><i class="fa-solid fa-trash ml-2"></i>
+						</button>
+
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="container" th:unless="${contact}">
+			<h1 class="text-center text-white bg-danger mx-2 py-3">You do
+				not have permissions to see this contact !!</h1>
+		</div>
+
+	</section>
+</body>
+</html>
